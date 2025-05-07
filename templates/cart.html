@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cart - Spice Paradise</title>
+  <link rel="stylesheet" href="/static/css/styles.css">
+  <script>
+    function loadCart() {
+      const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+      const cartContainer = document.getElementById('cart-items');
+      let total = 0;
+
+      if (cartItems.length === 0) {
+        cartContainer.innerHTML = "<p class='empty-cart'>Your cart is empty!</p>";
+      } else {
+        cartContainer.innerHTML = cartItems.map((item, index) => `
+          <div class="cart-item">
+            <div class="item-details">
+              <h4>${item.name}</h4>
+              <p>Price: ₹${item.price}</p>
+            </div>
+            <div class="item-quantity">
+              <button type="button" class="quantity-btn" onclick="decreaseQuantity(${index})">-</button>
+              <span class="quantity-number">${item.quantity}</span>
+              <button type="button" class="quantity-btn" onclick="increaseQuantity(${index})">+</button>
+            </div>
+            <div class="item-total">
+              ₹${item.price * item.quantity}
+            </div>
+          </div>
+        `).join('');
+        total = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+      }
+
+      document.getElementById('subtotal').innerText = total.toFixed(2);
+    }
+
+    function increaseQuantity(index) {
+      const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+      cartItems[index].quantity += 1;
+      localStorage.setItem('cart', JSON.stringify(cartItems));
+      loadCart();
+    }
+
+    function decreaseQuantity(index) {
+      const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+      cartItems[index].quantity -= 1;
+      if (cartItems[index].quantity <= 0) {
+        cartItems.splice(index, 1); // Remove the item if quantity reaches 0
+      }
+      localStorage.setItem('cart', JSON.stringify(cartItems));
+      loadCart();
+    }
+
+    async function submitOrder(event) {
+      event.preventDefault();
+
+      const address = document.getElementById('address').value.trim();
+      const tip = parseFloat(document.getElementById('tip').value) || 0;
+      const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+
+      if (cartItems.length === 0) {
+        alert('Your cart is empty!');
+        return;
+      }
+
+      const subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+      const total = subtotal + tip;
+
+      const orderData = {
+        address: address,
+        tip: tip,
+        subtotal: subtotal,
+        total: total,
+        items: cartItems
+      };
+
+      try {
+        const response = await fetch('/submit-cart', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(orderData)
+        });
+
+        if (response.ok) {
+          alert('Order placed successfully! Thank you!');
+          localStorage.removeItem('cart');
+          window.location.href = "/";
+        } else {
+          alert('Failed to place order. Please try again.');
+        }
+        
+      } catch (error) {
+        console.error('Error submitting order:', error);
+        alert('An unexpected error occurred.');
+      }
+    }
+  </script>
+</head>
+
+<body onload="loadCart()">
+
+<header>
+  <div class="logo">
+    <img src="/static/img/logo_resized.png" alt="Spice Paradise Logo">
+  </div>
+  <nav>
+    <a href="/index">Home</a>
+    <a href="/menu">Menu</a>
+    <a href="/contact">Contact</a>
+    <a href="/booking">Restaurant Booking</a>
+    <a href="/" class="active">Cart</a>
+  </nav>
+</header>
+
+<main>
+  <section id="cart" class="cart">
+    <h2>Your Cart</h2>
+    <div id="cart-items" class="cart-items"></div>
+
+    <h3>Order Summary</h3>
+    <p>Subtotal: ₹<span id="subtotal">0.00</span></p>
+
+    <form id="checkout-form" onsubmit="submitOrder(event)" class="checkout-form">
+      <input type="text" id="address" placeholder="Enter Delivery Address" required>
+      <input type="number" id="tip" placeholder="Tip Amount (optional)" min="0" step="0.5">
+      <button type="submit" class="checkout-btn">Place Order</button>
+    </form>
+  </section>
+</main>
+
+<footer>
+  <p>&copy; 2025 Spice Paradise. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

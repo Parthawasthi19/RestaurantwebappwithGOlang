@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu - Spice Paradise</title>
+  <link rel="stylesheet" href="/static/css/styles.css">
+  <script>
+    function addToCart(itemName, price) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const itemIndex = cart.findIndex(item => item.name === itemName);
+      if (itemIndex > -1) {
+        cart[itemIndex].quantity += 1;
+      } else {
+        cart.push({ name: itemName, price: price, quantity: 1 });
+      }
+      localStorage.setItem('cart', JSON.stringify(cart));
+      alert(itemName + " added to cart!");
+    }
+  </script>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">
+    <img src="/static/img/logo_resized.png" alt="Spice Paradise Logo">
+  </div>
+  <nav>
+    <a href="/index">Home</a>
+    <a href="/menu">Menu</a>
+    <a href="/contact">Contact</a>
+    <a href="/booking">Restaurant Booking</a>
+    <a href="/cart">Cart</a>
+  </nav>
+</header>
+
+<section id="menu" class="menu">
+  <h2>Our Menu</h2>
+  <p>Delight in our range of mouth-watering Indian dishes.</p>
+
+  <!-- Appetizers -->
+  <div class="menu-category">
+    <h3>Appetizers</h3>
+    <div class="menu-grid">
+      <div class="menu-item">
+        <img src="../static/img/samosa.jpeg" alt="Samosa">
+        <h4>Samosa</h4>
+        <p>₹80</p>
+        <button onclick="addToCart('Samosa', 80)">Add to Cart</button>
+      </div>
+      <div class="menu-item">
+        <img src="../static/img/paneer_tikka.jpg" alt="Paneer Tikka">
+        <h4>Paneer Tikka</h4>
+        <p>₹220</p>
+        <button onclick="addToCart('Paneer Tikka', 220)">Add to Cart</button>
+      </div>
+      <div class="menu-item">
+        <img src="../static/img/pakora.jpeg" alt="Pakora">
+        <h4>Pakora</h4>
+        <p>₹120</p>
+        <button onclick="addToCart('Pakora', 120)">Add to Cart</button>
+      </div>
+      <div class="menu-item">
+        <img src="../static/img/aloo_tikki.jpg" alt="Aloo Tikki">
+        <h4>Aloo Tikki</h4>
+        <p>₹100</p>
+        <button onclick="addToCart('Aloo Tikki', 100)">Add to Cart</button>
+      </div>
+      <div class="menu-item">
+        <img src="../static/img/Hara-Bhara-Kebab.jpg" alt="Hara Bhara Kabab">
+        <h4>Hara Bhara Kabab</h4>
+        <p>₹140</p>
+        <button onclick="addToCart('Hara Bhara Kabab', 140)">Add to Cart</button>
+      </div>
+      <div class="menu-item">
+        <img src="../static/img/chilli-paneer.jpg" alt="Chilli Paneer">
+        <h4>Chilli Paneer</h4>
+        <p>₹200</p>
+        <button onclick="addToCart('Chilli Paneer', 200)">Add to Cart</button>
+      </div>
+      <div class="menu-item">
+        <img src="../static/img/malai tikka.jpeg" alt="Malai Tikka">
+        <h4>Malai Tikka</h4>
+        <p>₹250</p>
+        <button onclick="addToCart('Malai Tikka', 250)">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Courses -->
+  <div class="menu-category">
+    <h3>Main Courses</h3>
+    <div class="menu-grid">
+      <div class="menu-item">
+        <img src="../static/img/butter_chicken.jpg" alt="Butter Chicken">
+        <h4>Butter Chicken</h4>
+        <p>₹280</p>
+        <button onclick="addToCart('Butter Chicken', 280)">Add to Cart</button>
+      </div>
+      <div class="menu-item">
+        <img src="../static/img/biryani.jpeg" alt="Biryani">
+        <h4>Biryani</h4>
+        <p>₹250</p>
+        <button onclick="addToCart('Biryani', 250)">Add to Cart</button>
+      </div>
+      <div class="menu-item">
+        <img src="../static/img/chicken tikka.jpeg" alt="Chicken Tikka Masala">
+        <h4>Chicken Tikka Masala</h4>
+        <p>₹260</p>
+        <button onclick="addToCart('Chicken Tikka Masala', 260)">Add to Cart</button>
+      </div>
+      <div class="menu-item">
+        <img src="../static/img/DalMakhni.jpg" alt="Dal Makhani">
+        <h4>Dal Makhani</h4>
+        <p>₹200</p>
+        <button onclick="addToCart('Dal Makhani', 200)">Add to Cart</button>
+      </div>
+      <div class="menu-item">
+        <img src="../static/img/chana masala.jpg" alt="Chana Masala">
+        <h4>Chana Masala</h4>
+        <p>₹180</p>
+        <button onclick="addToCart('Chana Masala', 180)">Add to Cart</button>
+      </div>
+      <div class="menu-item">
+        <img src="../static/img/matar paneer.jpeg" alt="Matar Paneer">
+        <h4>Matar Paneer</h4>
+        <p>₹210</p>
+        <button onclick="addToCart('Matar Paneer', 210)">Add to Cart</button>
+      </div>
+      <div class="menu-item">
+        <img src="../static/img/palak paneer.jpeg" alt="Palak Paneer">
+        <h4>Palak Paneer</h4>
+        <p>₹220</p>
+        <button onclick="addToCart('Palak Paneer', 220)">Add to Cart</button>
+      </div>
+      <div class="menu-item">
+        <img src="../static/img/baingan bharta.jpeg" alt="Baingan Bharta">
+        <h4>Baingan Bharta</h4>
+        <p>₹190</p>
+        <button onclick="addToCart('Baingan Bharta', 190)">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Desserts -->
+  <div class="menu-category">
+    <h3>Desserts</h3>
+    <div class="menu-grid">
+      <div class="menu-item">
+        <img src="../static/img/Gulab-Jamun.jpg" alt="Gulab Jamun">
+        <h4>Gulab Jamun</h4>
+        <p>₹90</p>
+        <button onclick="addToCart('Gulab Jamun', 90)">Add to Cart</button>
+      </div>
+      <div class="menu-item">
+        <img src="../static/img/kheer.webp" alt="Kheer">
+        <h4>Kheer</h4>
+        <p>₹100</p>
+        <button onclick="addToCart('Kheer', 100)">Add to Cart</button>
+      </div>
+      <div class="menu-item">
+        <img src="../static/img/rasmalai.jpg" alt="Rasmalai">
+        <h4>Rasmalai</h4>
+        <p>₹110</p>
+        <button onclick="addToCart('Rasmalai', 110)">Add to Cart</button>
+      </div>
+      <div class="menu-item">
+        <img src="../static/img/halwa.jpg" alt="Halwa">
+        <h4>Halwa</h4>
+        <p>₹90</p>
+        <button onclick="addToCart('Halwa', 90)">Add to Cart</button>
+      </div>
+      <div class="menu-item">
+        <img src="../static/img/ladoo.jpeg" alt="Ladoo">
+        <h4>Ladoo</h4>
+        <p>₹80</p>
+        <button onclick="addToCart('Ladoo', 80)">Add to Cart</button>
+      </div>
+      <div class="menu-item">
+        <img src="../static/img/barfi.jpeg" alt="Barfi">
+        <h4>Barfi</h4>
+        <p>₹100</p>
+        <button onclick="addToCart('Barfi', 100)">Add to Cart</button>
+      </div>
+      <div class="menu-item">
+        <img src="../static/img/ice cream.jpg" alt="Kulfi">
+        <h4>Ice Cream</h4>
+        <p>₹120</p>
+        <button onclick="addToCart('Kulfi', 120)">Add to Cart</button>
+      </div>
+      <div class="menu-item">
+        <img src="../static/img/fruit-salad.webp" alt="Fruit Salad">
+        <h4>Fruit Salad</h4>
+        <p>₹90</p>
+        <button onclick="addToCart('Fruit Salad', 90)">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Beverages -->
+  <div class="menu-category">
+    <h3>Beverages</h3>
+    <div class="menu-grid">
+      <div class="menu-item">
+        <img src="../static/img/masala chai.jpeg" alt="Masala Chai">
+        <h4>Masala Chai</h4>
+        <p>₹60</p>
+        <button onclick="addToCart('Masala Chai', 60)">Add to Cart</button>
+      </div>
+      <div class="menu-item">
+        <img src="../static/img/lassi.jpg" alt="Lassi">
+        <h4>Lassi</h4>
+        <p>₹80</p>
+        <button onclick="addToCart('Lassi', 80)">Add to Cart</button>
+      </div>
+      <div class="menu-item">
+        <img src="../static/img/Badam-Milk.jpg" alt="Badam Milk">
+        <h4>Badam Milk</h4>
+        <p>₹90</p>
+        <button onclick="addToCart('Badam Milk', 90)">Add to Cart</button>
+      </div>
+      <div class="menu-item">
+        <img src="../static/img/coconut water.jpg" alt="Coconut Water">
+        <h4>Coconut Water</h4>
+        <p>₹70</p>
+        <button onclick="addToCart('Coconut Water', 70)">Add to Cart</button>
+      </div>
+      <div class="menu-item">
+        <img src="../static/img/mint lemonade.jpg" alt="Mint Lemonade">
+        <h4>Mint Lemonade</h4>
+        <p>₹80</p>
+        <button onclick="addToCart('Mint Lemonade', 80)">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<footer>
+  <p>&copy; 2025 Spice Paradise. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
