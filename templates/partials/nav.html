@@ -1,0 +1,21 @@
+{{define "nav"}}
+<header>
+    <div class="logo">
+        <img src="/static/img/logo_resized.png" alt="Spice Paradise Logo" style="width: 80px; height: 80px;">
+    </div>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/menu">Menu</a>
+        <a href="/contact">Contact</a>
+        <a href="/booking">Restaurant Booking</a>
+        <a href="/cart">Cart</a>
+        {{if .UserSession }}
+            <span style="color: #fff; margin: 0 10px;">Welcome, {{.UserSession.Username}}!</span>
+            <a href="/logout">Logout</a>
+        {{else}}
+            <a href="/login">Login</a>
+            <a href="/register">Register</a>
+        {{end}}
+    </nav>
+</header>
+{{end}}
